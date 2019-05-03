@@ -1,0 +1,50 @@
+ <h2>Crée ton compte utilisateur</h2><br><br>
+
+ <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+      <%= label_tag 'Prénom' %>
+      <%= text_field_tag 'first_name' %>
+      <br /> <br />
+
+      <%= label_tag 'Nom' %>
+      <%= text_field_tag 'last_name' %>
+      <br /> <br />
+
+       <%= label_tag 'Age' %>
+      <%= text_field_tag 'age' %>
+      <br /> <br />
+
+      <%= label_tag 'Ville' %>
+      <%= text_field_tag 'city_name' %>
+      <br /> <br />
+
+      <%= label_tag 'Zip code' %>
+      <%= text_field_tag 'zip_code' %>
+      <br /> <br />
+
+      <%= label_tag 'Email' %>
+      <%= text_field_tag 'email' %>
+      <br /> <br />
+
+      <%= label_tag 'Mot de passe' %>
+      <%= text_field_tag 'password' %>
+      <br /> <br />
+
+
+      <%= submit_tag "Create account" %>
+
+    <% end %>
+  </br>
+  </br>
+  </br>
+
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+        <p>Nous n'avons pas réussi à créer votre compte pour la (ou les) raison(s) suivante(s) :</p>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+<% end %>

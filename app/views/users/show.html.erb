@@ -1,0 +1,16 @@
+
+<body>
+<h3>Bienvenue sur la page de <%=" #{@user_precis.first_name} #{@user_precis.last_name}" %></h3>
+
+<%= "Âge : #{@user_precis.age} ans" %> </br>
+<%= "Ville : "%> <%=link_to "#{@user_city}", city_path(@user_city_id) %></br>
+<%= "Description : #{@user_precis.description}" %></br>
+<%= "Email : #{@user_precis.email}" %><br>
+<%= "Profil créé le #{@user_precis.created_at}" %> </br>
+</body>
+
+</br></br>
+  </div>
+</div>
+
+

@@ -1,0 +1,22 @@
+<br><h2><%= "Voici la page de la ville de #{@city.name}" %></h2><br>
+<% @city_users.each do |u| %>
+<h4><%= u.first_name %>
+<%= u.last_name %></h4>
+	<% u.gossips.each do |g| %>
+		<h6><%= g.title %></h6>
+		<%= g.content %><br>
+
+
+
+	<% pre_like = g.likes.find { |like| like.user_id == current_user.id} %>
+   <% if pre_like %>
+     <%= button_to 'Unlike', gossip_like_path(g, pre_like), method: :delete %>
+   <% else %>
+     <%= button_to 'Like', gossip_likes_path(g), method: :post %> 
+   <% end %>
+
+    <p><span class="badge badge-primary badge-pill"> <%=g.likes.count %> <%= (g.likes.count) == 1 ? 'Like' : 'Likes'%></p></span> </p>
+   <br><br>
+
+<% end %> 
+<% end %> 

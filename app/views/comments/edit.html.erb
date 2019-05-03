@@ -1,0 +1,15 @@
+
+<h1> Editer le commentaire </h1>
+
+<%= form_tag url_for(action: 'update'), method: "patch" do %>
+	<%= label_tag 'Content' %>
+		<%= text_area_tag 'content', @comment.content, class: "form-control" %>
+		<br/>
+
+		<%= submit_tag "Confirm", class: "btn btn-primary" %>
+
+		<%= link_to "Delete Comment", gossip_comment_path, data: {confirm: "Are you sure?"}, method: "delete", class: "btn btn-danger mb-0 ml-2" %>
+
+		<% end %>
+		
+	

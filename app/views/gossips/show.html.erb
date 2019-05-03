@@ -1,0 +1,48 @@
+ <h3><%= "Gossip  de   #{@gossip_precis.user.first_name} #{@gossip_precis.user.last_name}" %></h3>
+   <p> 
+
+  
+      <h6> <%= "#{@gossip_precis.title}" %></h6>
+      <%= "#{@gossip_precis.content}" %><br>
+
+    <% pre_like = @gossip_precis.likes.find { |like| like.user_id == current_user.id} %>
+   <% if pre_like %>
+     <%= button_to 'Unlike', gossip_like_path(@gossip_precis, pre_like), method: :delete %>
+   <% else %>
+     <%= button_to 'Like', gossip_likes_path(@gossip_precis), method: :post %>
+   <% end %>
+      
+
+ <p><span class="badge badge-primary badge-pill"> <%=@gossip_precis.likes.count %> <%= (@gossip_precis.likes.count) == 1  ? 'Like' : 'Likes'%></p></span> </p>
+
+
+
+
+
+      <%= "Auteur :" %> <%=link_to " #{@gossip_precis.user.first_name} #{@gossip_precis.user.last_name}", user_path(@gossip_precis.user.id) %><br>
+      <%= "Ville :" %><%= link_to " #{@gossip_user_city}", city_path(@gossip_user_city_id) %><br>
+
+       <% if current_user == @gossip_precis.user %> 
+      <%= link_to "Editer ce potin", edit_gossip_path(@gossip_precis.id)%><br>
+	  <%= link_to 'Annihiler ce potin',
+            gossip_path(@gossip_precis),
+                        method: :delete,
+                        data: { confirm: 'Are you sure of the annihilation ?' } %><br>
+      <% end %> 
+
+<%= form_tag gossip_comments_path( controller: :comments, action: :create, gossip_id: @gossip_precis.id ), method: "post" do %>
+
+<div class="form-group">
+<label>commentaire</label>
+<%= text_area_tag :content %>
+ </div>
+<div class="form-group">
+<button type="submit" class="btn btn-primary">Ajouter le commentaire </button>
+ </div>
+ <% end %>
+
+ <% @gossip_precis.comments.each do |c|%> 
+ <%= "#{c.content}"%> <br>
+ <%= "#{c.user.first_name}  #{c.user.last_name}"%><br>
+ <%= link_to "Editer ce commentaire", edit_gossip_comment_path(@gossip_precis.id, c.id)%> <br> <br>
+ <% end %> 
